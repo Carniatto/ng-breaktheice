@@ -1,42 +1,70 @@
-<div class="content">
-  <h2>
-    User List
-    <a class="button is-white" (click)="edit = !edit">
-    <span class="icon">
-      <i class="fa has-text-primary"
-        [ngClass]="edit?'fa-check':'fa-pencil'"></i>
-    </span>
-    </a>
-  </h2>
-  
-  <div *ngFor="let u of users">
-    <span (click)="removeUser(u)" class="icon btn" *ngIf="edit">
-      <i class="fa fa-close has-text-danger"></i>
-    </span>
-    <span (click)="removeUser(u)" class="icon" *ngIf="!edit">
-      <i class="fa fa-angle-right"></i>
-    </span>
-    <span *ngIf="!edit">{{u}}</span>
-    <input #user type="text" *ngIf="edit"
-      class="inline"
-      [value]="u"
-      (blur)="updateUser(u, $event.target.value)"
-      (keydown.esc)="user.value = u"
-      (keydown.enter)="updateUser(u, $event.target.value)">
-  </div>
-  <div *ngIf="edit">
-    <span (click)="removeUser(u)" class="icon">
-      <i class="fa fa-plus"></i>
-    </span>
-    <input #user
-      type="text"
-      placeholder="Add a user..."
-      class="inline"
-      (blur)="user.value=''"
-      (keydown.esc)="user.value=''"
-      (keydown.enter)="users.push(user.value); user.value=''">
-      <span class="icon is-small is-right">
-        <i class="fa fa-check"></i>
+<div class="content columns">
+  <div class="column">
+    <h2>
+      User List
+      <a class="button is-white" (click)="edit = !edit">
+      <span class="icon">
+        <i class="fa has-text-primary"
+          [ngClass]="edit?'fa-check':'fa-pencil'"></i>
       </span>
+      </a>
+    </h2>
+
+    <div>
+      <app-inline-input *ngFor="let u of users"
+        [data]="u.name"
+        [isEditing]="edit"
+        [selected]="selectedUser?.id==u.id"
+        (select)="selectUser(u)"
+        (remove)="removeUser(u)"
+        (update)="updateUser(u, $event)">
+      </app-inline-input>
+    </div>
+    <div *ngIf="edit">
+      <span class="icon">
+        <i class="fa fa-plus"></i>
+      </span>
+      <input #user
+        type="text"
+        placeholder="Add a user..."
+        class="inline"
+        (blur)="user.value=''"
+        (keydown.esc)="user.value=''"
+        (keydown.enter)="addUser(user.value); user.value=''">
+    </div>
+  </div>
+  <div class="card" *ngIf="selectedUser">
+    <div class="card-content">
+      <div class="media">
+        <div class="media-left">
+          <figure class="image is-96x96">
+            <img src="https://api.adorable.io/avatars/96/{{selectedUser.email}}.png" alt="Placeholder image">
+          </figure>
+        </div>
+        <div class="media-content">
+          <p class="title is-4">{{selectedUser.name}}</p>
+          <p class="subtitle is-7">
+            <span class="icon is-small">
+              <i class="fa fa-envelope has-text-primary"></i>
+            </span>
+            <a href="mailto:{{selectedUser.email}}">{{selectedUser.email}}</a>
+            <br />
+            <span class="icon is-small">
+              <i class="fa fa-globe has-text-primary"></i>
+            </span>
+            <a href="{{selectedUser.website}}">{{selectedUser.website}}</a>
+          </p>
+        </div>
+      </div>
+
+      <div class="content">
+        Recent Posts
+        <ol>
+          <li *ngFor="let p of selectedUser.posts">
+            {{p.title}}
+          </li>
+        </ol>
+      </div>
+    </div>
   </div>
 </div>

@@ -1,0 +1,17 @@
+<div>
+  <span (click)="onRemove()" class="icon btn" *ngIf="isEditing">
+    <i class="fa fa-close has-text-danger"></i>
+  </span>
+  <span class="icon" *ngIf="!isEditing">
+    <i class="fa fa-angle-right"></i>
+  </span>
+  <span *ngIf="!isEditing"
+    (click)="onSelect()"
+    [class.has-text-primary]="selected">{{data}}</span>
+  <input #user type="text"
+    *ngIf="isEditing"
+    [value]="data"
+    (blur)="onUpdate($event.target.value)"
+    (keydown.enter)="onUpdate($event.target.value)"
+    (keydown.esc)="$event.target.value = data">
+</div>

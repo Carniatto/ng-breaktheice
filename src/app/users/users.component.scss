@@ -1,4 +1,13 @@
-input.inline {
+.content {
+    padding-top: 10px;
+    padding-bottom: 10px
+}
+
+.icon.btn {
+    cursor: pointer;
+}
+
+input {
     border: none;
     font-size: 16px;
     &:focus {
@@ -7,11 +16,20 @@ input.inline {
     }
 }
 
-.content {
-    padding-top: 10px;
-    padding-bottom: 10px
+.selected {
+    color: darkcyan;
+    font-weight: bold;
 }
 
-.icon.btn {
-    cursor: pointer;
+.card {
+  height: fit-content;
+  width: 500px;
+}
+
+.card-content {
+  padding: 0.5rem;
+}
+
+figure {
+  margin: 1em;
 }

@@ -1,0 +1,13 @@
+span {
+    cursor: pointer;
+}
+
+input {
+    border: none;
+    font-size: 16px;
+    width: 200px;
+    &:focus {
+        outline: none;
+        border-bottom: 1px solid #00d1b2;
+    }
+}
