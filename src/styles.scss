@@ -1,0 +1,31 @@
+/* You can add global styles to this file, and also import other style files */
+
+body {
+}
+
+.header {
+    position: fixed;
+    width: 100vw;
+    top: 0;
+    z-index: 9;
+}
+
+.footer {
+    position: fixed;
+    width: 100vw;
+    bottom: 0;
+    z-index: 9;
+    padding: 2rem;
+}
+
+.body {
+    padding-top: 157px;
+    padding-bottom: 112px;
+    height: 100vh;
+    overflow: hidden;
+    > .container {
+        overflow-y: scroll;
+        height: 100%;
+        padding: 20px 0;
+    }
+}
