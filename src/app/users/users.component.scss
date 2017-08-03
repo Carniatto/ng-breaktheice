@@ -1,0 +1,17 @@
+input.inline {
+    border: none;
+    font-size: 16px;
+    &:focus {
+        outline: none;
+        border-bottom: 1px solid #00d1b2;
+    }
+}
+
+.content {
+    padding-top: 10px;
+    padding-bottom: 10px
+}
+
+.icon.btn {
+    cursor: pointer;
+}

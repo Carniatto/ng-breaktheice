@@ -1,0 +1,42 @@
+<div class="content">
+  <h2>
+    User List
+    <a class="button is-white" (click)="edit = !edit">
+    <span class="icon">
+      <i class="fa has-text-primary"
+        [ngClass]="edit?'fa-check':'fa-pencil'"></i>
+    </span>
+    </a>
+  </h2>
+  
+  <div *ngFor="let u of users">
+    <span (click)="removeUser(u)" class="icon btn" *ngIf="edit">
+      <i class="fa fa-close has-text-danger"></i>
+    </span>
+    <span (click)="removeUser(u)" class="icon" *ngIf="!edit">
+      <i class="fa fa-angle-right"></i>
+    </span>
+    <span *ngIf="!edit">{{u}}</span>
+    <input #user type="text" *ngIf="edit"
+      class="inline"
+      [value]="u"
+      (blur)="updateUser(u, $event.target.value)"
+      (keydown.esc)="user.value = u"
+      (keydown.enter)="updateUser(u, $event.target.value)">
+  </div>
+  <div *ngIf="edit">
+    <span (click)="removeUser(u)" class="icon">
+      <i class="fa fa-plus"></i>
+    </span>
+    <input #user
+      type="text"
+      placeholder="Add a user..."
+      class="inline"
+      (blur)="user.value=''"
+      (keydown.esc)="user.value=''"
+      (keydown.enter)="users.push(user.value); user.value=''">
+      <span class="icon is-small is-right">
+        <i class="fa fa-check"></i>
+      </span>
+  </div>
+</div>
